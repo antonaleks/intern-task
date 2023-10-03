@@ -1,0 +1,13 @@
+---
+# tasks file for docker-install
+- name: Install aptitude
+
+- name: Install required system packages
+
+- name: Add Docker GPG apt Key
+
+- name: Add Docker Repository
+
+- name: Update apt and install docker-io
+
+- name: Install Docker Compose

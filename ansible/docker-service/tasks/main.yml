@@ -1,0 +1,8 @@
+---
+# tasks file for docker-service
+
+- name: Create docker-compose dirs
+
+- name: Configure service compose file
+
+- name: Start containers
