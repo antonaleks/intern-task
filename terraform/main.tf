@@ -9,6 +9,7 @@ module "keypair" {
 # Создание приватной сети для ВМ
 module "nat" {
   source = "./modules/nat"
+  subnet_cidr = "192.168.1.0/24"
 }
 
 # Создание прерываемого сервера.
@@ -36,13 +37,13 @@ module "preemptible_server" {
 }
 
 # Создание inventory файла для ansible
-resource "local_file" "ansible_inventory" {
-  content = templatefile("./resources/inventory.tmpl",
-    {
-      webapp_vm_ip_public  = module.preemptible_server.0.floating_ip,
-      database_vm_ip_public      = module.preemptible_server.1.floating_ip,
-      webapp_vm_ip_nat     = module.preemptible_server.1.nat_ip.0
-    }
-  )
-  filename = "../ansible/inventory.ini"
-}
+/* resource "local_file" "ansible_inventory" { */
+/*   content = templatefile("./resources/inventory.tmpl", */
+/*     { */
+/*       webapp_vm_ip_public  = module.preemptible_server.0.floating_ip, */
+/*       database_vm_ip_public      = module.preemptible_server.1.floating_ip, */
+/*       webapp_vm_ip_nat     = module.preemptible_server.1.nat_ip.0 */
+/*     } */
+/*   ) */
+/*   filename = "../ansible/inventory.ini" */
+/* } */
