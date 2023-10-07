@@ -3,3 +3,8 @@ ${webapp_vm_ip_nat} ansible_ssh_host=${webapp_vm_ip_public} ansible_ssh_user=roo
 
 [database]
 ${database_vm_ip_nat} ansible_ssh_host=${database_vm_ip_public} ansible_ssh_user=root
+
+[db_access:children]
+webapp
+database
+
