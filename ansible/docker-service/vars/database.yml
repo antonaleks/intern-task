@@ -11,7 +11,7 @@ docker_service__compose:
       volumes:
         - todo-mysql-data:/var/lib/mysql
       environment:
-        MYSQL_ROOT_PASSWORD:
-        MYSQL_DATABASE:
+        MYSQL_ROOT_PASSWORD: "{{ MYSQL_PASSWORD }}"
+        MYSQL_DATABASE: "{{ MYSQL_DB }}"
   volumes:
     todo-mysql-data:
