@@ -2,7 +2,17 @@
 # tasks file for docker-service
 
 - name: Create docker-compose dirs
+  file:
+    path: /srv/docker
+    state: directory
 
 - name: Configure service compose file
+  template:
+    src: templates/docker-compose.yml.j2
+    dest: /srv/docker/docker-compose.yml
 
 - name: Start containers
+  docker_compose:
+    project_src: /srv/docker/
+    state: present
+

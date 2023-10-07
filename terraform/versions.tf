@@ -10,9 +10,11 @@ terraform {
   backend "s3" {
     bucket                      = "/students"
     endpoint                    = "s3.storage.selcloud.ru"
-    key                         = "" # название стейта указать <фамилия>.tfstate
+    key                         = "filippov.tfstate" # название стейта указать <фамилия>.tfstate
     region                      = "ru-1"
     skip_region_validation      = true
     skip_credentials_validation = true
+    access_key                  = var.access_key
+    secret_key                  = var.secret_key
   }
 }

@@ -1,3 +1,59 @@
+# Краткий гайд для проверяющих :) 
+## Результат
+Результат можно посмотреть по данной [ссылке](http://5.188.81.166/)
+
+## Terraform
+Чтобы не возиться с переменными можно сразу создать файл `set_vars.sh` (необязательно)
+
+1. Зайти в папку terraform 
+2. Создать файл `set_vars.sh` следующего вида (необязательно) со следующим содержанием (Не забудьте экранировать спец. символы !!!):
+```bash
+#!/bin/bash
+export TF_VAR_domain_name={{domain_name}}
+export TF_VAR_tenant_id={{tenant_id}}
+export TF_VAR_user_name={{user_name}}
+export TF_VAR_password={{password}}
+export TF_VAR_region={{region}}
+export TF_VAR_access_key={{access_key}}
+export TF_VAR_secret_key={{secret_key}}
+```
+3. Запустить команду (необязательно)
+```bash
+source set_vars.sh
+```
+4. Создать файл `backend.tfvars` со след. содержанием:
+```
+access_key={{access_key}}
+secret_key={{secret_key}}
+```
+5. Создать пару публичного и приватного ssh ключей в `~/.ssh/id_rsa.pub` и `~/.ssh/id_rsa`
+6. Запустить команду (не забыть включить перед этим VPN!)
+```bash
+terraform init -reconfigure -backend-config=backend.tfvars
+```
+7. Теперь можно задеплоить изменения
+```bash
+terraform apply
+``` 
+
+## Ansible
+
+1. Зайти в папку ansible
+2. Создать файл `db_access.yml` в папке `group_vars`:
+```bash
+ansible-vault create group_vars/db_access.yml
+``` 
+3. Содержание файла должно быть следующим:
+```
+MYSQL_DB: {DB_NAME}
+MYSQL_PASSWORD: {DB_PASSWORD}
+```
+
+4. Запустить команду:
+```
+ansible-playbook playbook.yml --ask-vault-pass
+```
+
 # CloudPractice
 Практическое задание для работы с terraform, ansible и облаком Selectel.
 
