@@ -1,4 +1,7 @@
 # Краткий гайд для проверяющих :) 
+## Результат
+Результат можно посмотреть по данной [ссылке](http://5.188.81.166/)
+
 ## Terraform
 Чтобы не возиться с переменными можно сразу создать файл `set_vars.sh` (необязательно)
 
@@ -23,7 +26,7 @@ source set_vars.sh
 access_key={{access_key}}
 secret_key={{secret_key}}
 ```
-5. Создать пару публичный и приватный ssh ключей в `~/.ssh/id_rsa.pub` и `~/.ssh/id_rsa`
+5. Создать пару публичного и приватного ssh ключей в `~/.ssh/id_rsa.pub` и `~/.ssh/id_rsa`
 6. Запустить команду (не забыть включить перед этим VPN!)
 ```bash
 terraform init -reconfigure -backend-config=backend.tfvars
@@ -33,7 +36,7 @@ terraform init -reconfigure -backend-config=backend.tfvars
 terraform apply
 ``` 
 
-# Ansible
+## Ansible
 
 1. Зайти в папку ansible
 2. Создать файл `db_access.yml` в папке `group_vars`:
