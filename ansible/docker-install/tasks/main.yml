@@ -1,13 +1,44 @@
 ---
 # tasks file for docker-install
+# https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-20-04
+
 - name: Install aptitude
+  apt:
+    name: aptitude
+    state: present 
+    update_cache: yes 
+    cache_valid_time: 3600 # 1 h
 
 - name: Install required system packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
+    state: latest
+    update_cache: true
 
 - name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
 
 - name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
 
 - name: Update apt and install docker-io
+  apt:
+    name: docker-io
+    state: latest
+    update_cache: true
 
 - name: Install Docker Compose
+  pip:
+    name: docker-compose
+    state: present
