@@ -32,16 +32,17 @@ module "preemptible_server" {
   # переменную server_no_preemptible_tag:
   # server_preemptible_tag = var.server_no_preemptible_tag
   server_preemptible_tag = var.server_preemptible_tag
-  #  server_ssh_key_user    = ""
+  # server_ssh_key_user    = ""
 }
 
 # Создание inventory файла для ansible
 resource "local_file" "ansible_inventory" {
   content = templatefile("./resources/inventory.tmpl",
     {
-      webapp_vm_ip_public  = module.preemptible_server.0.floating_ip,
-      database_vm_ip_public      = module.preemptible_server.1.floating_ip,
-      webapp_vm_ip_nat     = module.preemptible_server.1.nat_ip.0
+      webapp_vm_ip_public   = module.preemptible_server.0.floating_ip,
+      database_vm_ip_public = module.preemptible_server.1.floating_ip,
+      #webapp_vm_ip_nat      = module.preemptible_server.0.nat_ip.0,
+      database_vm_ip_nat    = module.preemptible_server.1.nat_ip.0
     }
   )
   filename = "../ansible/inventory.ini"
