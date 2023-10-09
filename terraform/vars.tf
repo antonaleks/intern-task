@@ -42,6 +42,8 @@ variable "server_no_preemptible_tag" {
   default = []
 }
 
+variable "db_name" {}
+
 ### ATTENTION!!! Do not edit this block, please.
 variable "server_zone" {
   type        = string
@@ -69,5 +71,9 @@ variable "user_name" {
 }
 
 variable "password" {
+  sensitive = true
+}
+
+variable "db_password" {
   sensitive = true
 }

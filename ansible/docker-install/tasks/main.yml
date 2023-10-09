@@ -1,40 +1,34 @@
 ---
 # tasks file for docker-install
 - name: Install aptitude
-  apt:
+  ansible.builtin.apt:
     name: aptitude
     state: present
     update_cache: true
 
 - name: Install required system packages
-  apt:
-    pkg:
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - software-properties-common
-      - python3-pip
-      - virtualenv
-      - python3-setuptools
-    state: latest
+  ansible.builtin.apt:
+    name: "{{ apt_list }}"
+    state: present
     update_cache: true
 
 - name: Add Docker GPG apt Key
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
+  ansible.builtin.apt_key:
+    url: "{{ docker_gpg_key_link }}"
     state: present
 
 - name: Add Docker Repository
-  apt_repository:
-    repo: deb https://download.docker.com/linux/ubuntu focal stable
+  ansible.builtin.apt_repository:
+    repo: "deb {{ docker_repository_link }} focal stable"
     state: present
 
-- name: Update apt and install docker-io
-  apt:
-    name: docker.io
-    state: latest
+- name: Install Docker
+  ansible.builtin.apt:
+    name: docker-ce
+    state: present
     update_cache: true
 
 - name: Install Docker Compose
-  pip:
-    name: docker-compose
+  ansible.builtin.pip:
+    name: docker-compose==1.29.2
+    state: present
