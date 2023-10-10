@@ -8,10 +8,12 @@ docker_service__compose:
       image: mysql:5.7
       ports:
         - "3306:3306"
+      expose:
+        - '3306'
       volumes:
         - todo-mysql-data:/var/lib/mysql
       environment:
-        MYSQL_ROOT_PASSWORD:
-        MYSQL_DATABASE:
+        MYSQL_ROOT_PASSWORD: "{{ MYSQL_ROOT_PASSWORD }}"
+        MYSQL_DATABASE: "{{MYSQL_DATABASE }}"
   volumes:
     todo-mysql-data:

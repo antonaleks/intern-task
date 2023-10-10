@@ -6,18 +6,18 @@
 - name: "Installing Docker and docker compose"
   hosts: all
   roles:
-  - docker-install
+    - docker-install
 
 - name: "Run Docker compose service: database"
   hosts: database
   vars_files:
     - "./docker-service/vars/database.yml"
   roles:
-  - docker-service
+    - docker-service
 
 - name: "Run Docker compose service: web app"
   hosts: webapp
   vars_files:
     - "./docker-service/vars/webapp.yml"
   roles:
-  - docker-service
+    - docker-service

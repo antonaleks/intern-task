@@ -10,7 +10,8 @@ docker_service__compose:
       ports:
         - "80:80"
       environment:
-        MYSQL_HOST:
-        MYSQL_USER:
-        MYSQL_PASSWORD:
-        MYSQL_DB:
+        MYSQL_HOST: "{{private_database_ip}}"
+        MYSQL_USER: "{{MYSQL_USER}}" 
+        MYSQL_PASSWORD: "{{MYSQL_PASSWORD}}"
+        MYSQL_DB: "{{MYSQL_DB}}" 
+  
