@@ -2,7 +2,18 @@
 # tasks file for docker-service
 
 - name: Create docker-compose dirs
+  ansible.builtin.file:
+    path: "/var/{{ group_names[0] }}"
+    state: directory
+    mode: '0644'
 
 - name: Configure service compose file
+  ansible.builtin.template:
+    src: templates/docker-compose.yml.j2
+    dest: "/var/{{ group_names[0] }}/docker-compose.yml"
+    mode: '0644'
 
 - name: Start containers
+  community.docker.docker_compose:
+    project_src: "/var/{{ group_names[0] }}"
+    state: present

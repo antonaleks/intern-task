@@ -13,11 +13,11 @@
   vars_files:
     - "./docker-service/vars/database.yml"
   roles:
-  - docker-service
+    - docker-service
 
 - name: "Run Docker compose service: web app"
   hosts: webapp
   vars_files:
     - "./docker-service/vars/webapp.yml"
   roles:
-  - docker-service
+    - docker-service

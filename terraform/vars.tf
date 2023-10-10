@@ -15,11 +15,11 @@ variable "server_vcpus" {
 }
 
 variable "server_ram_mb" {
-  default = 1024
+  default = 2048
 }
 
 variable "server_root_disk_gb" {
-  default = 5
+  default = 10
 }
 
 variable "region" {
@@ -41,6 +41,8 @@ variable "server_preemptible_tag" {
 variable "server_no_preemptible_tag" {
   default = []
 }
+
+variable "db_name" {}
 
 ### ATTENTION!!! Do not edit this block, please.
 variable "server_zone" {
@@ -69,5 +71,9 @@ variable "user_name" {
 }
 
 variable "password" {
+  sensitive = true
+}
+
+variable "db_password" {
   sensitive = true
 }

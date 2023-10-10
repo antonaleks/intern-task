@@ -1,0 +1,10 @@
+apt_list:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - software-properties-common
+  - python3-pip
+  - virtualenv
+  - python3-setuptools
+docker_gpg_key_link: https://download.docker.com/linux/ubuntu/gpg
+docker_repository_link: https://download.docker.com/linux/ubuntu

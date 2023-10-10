@@ -1,0 +1,12 @@
+[webapp]
+${webapp_vm_ip_public} 
+
+[database]
+${database_vm_ip_public}
+
+[all:vars]
+db_name=${database_name}
+db_password=${database_password}
+
+[webapp:vars]
+db_address=${database_vm_ip_nat}
