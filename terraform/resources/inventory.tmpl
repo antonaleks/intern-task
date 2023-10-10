@@ -6,3 +6,7 @@ ${database_vm_ip_public} private_database_ip=${database_vm_ip_nat}
 
 [webapp:vars]
 private_database_ip=${database_vm_ip_nat}
+
+[secret_vars:children]
+webapp
+database
