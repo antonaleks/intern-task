@@ -4,7 +4,7 @@
 
 ---
 - name: "Installing Docker and docker compose"
-  hosts: all
+  hosts: webapp:database
   roles:
   - docker-install
 

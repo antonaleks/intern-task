@@ -15,11 +15,11 @@ variable "server_vcpus" {
 }
 
 variable "server_ram_mb" {
-  default = 1024
+  default = 2048
 }
 
 variable "server_root_disk_gb" {
-  default = 5
+  default = 10
 }
 
 variable "region" {
@@ -57,7 +57,7 @@ variable "server_zone" {
 
 # Sensitive block
 variable "domain_name" {
-  sensitive = true
+  sensitive = true 
 }
 
 variable "tenant_id" {

@@ -1,8 +1,26 @@
 ---
 # tasks file for docker-service
-
 - name: Create docker-compose dirs
+  ansible.builtin.file:
+    path: /root/deploy
+    state: directory
+    owner: root
+    group: root
+    mode: '0775'
 
 - name: Configure service compose file
+  ansible.builtin.copy:
+    src: /home/anton/intern-task/ansible/docker-service/vars/
+    dest: /root/deploy/
+    owner: root
+    group: root
+    mode: "0644"
 
 - name: Start containers
+  community.docker.docker_compose:
+    project_src: /root/deploy
+    state: present
+    files:
+    - "{{ compose_file }}"
+
+
