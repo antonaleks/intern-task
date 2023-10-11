@@ -1,0 +1,5 @@
+[webapp]
+server1 ansible_host=${webapp_vm_ip_public} ansible_user=root ansible_port=22 compose_file=webapp.yml
+
+[database]
+server2 ansible_host=${database_vm_ip_public} ansible_user=root ansible_port=22 compose_file=database.yml

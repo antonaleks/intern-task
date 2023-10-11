@@ -1,13 +1,57 @@
 ---
 # tasks file for docker-install
 - name: Install aptitude
+  ansible.builtin.apt:
+    name: aptitude
+    state: latest
+    update_cache: true
 
 - name: Install required system packages
+  ansible.builtin.apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
+    state: latest
+    update_cache: true
 
 - name: Add Docker GPG apt Key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
 
 - name: Add Docker Repository
+  ansible.builtin.apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
 
 - name: Update apt and install docker-io
+  ansible.builtin.apt:
+    name: docker-ce
+    state: latest
+    update_cache: true
 
-- name: Install Docker Compose
+- name: Install docker-compose
+  ansible.builtin.get_url:
+    url : https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: 'u+x,g+x'
+
+- name: Add user in Docker group
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    group: docker
+    append: true
+
+- name: Install bottle python package
+  ansible.builtin.pip:
+    name: 
+    - docker
+    - docker-compose
+
+# - name: Reboot
+#   ansible.builtin.reboot:
